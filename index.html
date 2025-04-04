@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCK SYSTEM</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/flowers.ico" type="image/x-icon">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ffffff;
+            --accent: #ffea00;
+            --accent-dark: #b8b8b8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary);
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+        
+        /* Video Banner */
+        .video-banner {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        
+        .video-banner video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 1;
+        }
+        
+        .banner-logo {
+            position: absolute;
+            z-index: 2;
+            max-width: 30%;
+            max-height: 30%;
+            /* filter: drop-shadow(0 0 20px rgb(112, 112, 112)); */
+            opacity: 1;
+            transition: all 0.2s ease;
+            /* filter: brightness(0)invert() ; */
+        }
+        
+        .banner-logo:hover {
+            transform: scale(1.05);
+            
+            /* filter: drop-shadow(0 0 25px rgba(255, 187, 0, 0.9)); */
+            opacity: 0;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+           
+            top: 0;
+            width: 100%;
+            background-color:var(--primary);
+            z-index: 100;
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+            gap: 3.5rem;
+        }
+        
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:hover {
+            color: var(--accent-dark);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 6rem 2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        
+        /* Visual Grid */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .visual-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: #111;
+            transition: all 0.4s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        }
+        
+        .visual-item.wide {
+            aspect-ratio: 16/9;
+            grid-column: span 2;
+        }
+        
+        .visual-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        }
+        
+        .visual-item:hover {
+            transform: translateY(-8px);
+            /* box-shadow: 0 10px 25px rgba(0, 255, 98, 0.3); */
+        }
+        
+        .visual-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .visual-item .overlay {
+            position: absolute;
+            color:#ffffff;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .visual-item:hover .overlay {
+            padding-bottom: 2rem;
+        }
+        
+        .visual-item h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+        
+        .visual-item p {
+            margin: 0.5rem 0 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Collaborators Section */
+        .collaborators-section {
+            background: #111;
+            padding: 3rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 40s linear infinite;
+        }
+        
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        
+        .collaborator-logo {
+            height: 80px;
+            margin: 0 1.5rem;
+            filter: invert(100%) brightness(0.8);
+            transition: all 0.3s ease;
+            opacity: 0.9;
+            vertical-align: middle;
+            display: inline-block;
+            
+        }
+        
+        .collaborator-logo:hover {
+            filter: contrast(50%) brightness(1);
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .collaborator-logo {
+                height: 40px;
+                margin: 0 1.5rem;
+            }
+        }
+        /* Category Navigation */
+        .category-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .category-card {
+            background: #111;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            border: 1px solid #222;
+        }
+        
+        .category-card:hover {
+            background: #1a1a1a;
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.2);
+        }
+        
+        .category-card h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+        }
+        
+        .category-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        
+        .category-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .category-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .category-card a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-member img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 0%;
+            border: 0px solid var(--accent);
+            margin-bottom: 1rem;
+            
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover img {
+            
+            transform: scale(1.05);
+        }
+        
+        .team-member h3 {
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+        .team-member p {
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .visual-item.wide {
+                grid-column: span 1;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+            }
+            
+            .collaborator-logo {
+                height: 80px;
+                margin: 0 1.5rem;
+                
+            }
+            
+            .banner-logo {
+                max-width: 80%;
+                max-height: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#featured">Featured</a></li>
+            <li><a href="#live">Live Work</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#visuals">Visuals</a></li>
+            <li><a href="#team">Team</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Video Banner with Logo -->
+    <div class="video-banner">
+        <video autoplay muted loop playsinline>
+            <source src="assets/videos/main-banner.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <img src="assets/images/block-sys-logo-sticker.png" alt="BLOCK SYSTEM" class="banner-logo">
+    </div>
+    
+    <!-- Featured Section -->
+    <section id="featured" class="section">
+        <h2 class="section-title">Featured</h2>
+        <div class="visual-grid">
+            <!-- BITCHBOY Featured Item -->
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/featured/heart2.png" alt="BITCHBOY MIDI Controller">
+                <div class="overlay">
+                    <h3>BITCHBOY</h3>
+                    <p>A MIDI Controller for VJs</p>
+                </div>
+            </a>
+
+            <!-- TV WALL -->
+            <a href="#art" class="visual-item">
+                <img src="assets/images/featured/tvwall.gif" alt="TV Wall">
+                <div class="overlay">
+                    <h3>TV Wall</h3>
+                    <p>Art Installation for Extrema Outdoor</p>
+                </div>
+            </a>
+            <!-- Installation Item -->
+            <a href="#art" class="visual-item">
+                <img src="assets/images/featured/stm.gif" alt="360LAB">
+                <div class="overlay">
+                    <h3>360LAB</h3>
+                    <p>360° live shows and installations</p>
+                </div>
+            </a>
+
+            <!-- Performance Item -->
+            <a href="#art" class="visual-item">
+                <img src="assets/images/featured/iA.gif" alt="iPhoneholics Anonymous">
+                <div class="overlay">
+                    <h3>IPHONEHOLICS ANONYMOUS</h3>
+                    <p>Interactive Dance Performance</p>
+                </div>
+            </a>
+            
+            
+            
+            
+        </div>
+    </section>
+    
+    <!-- Live Performances Section -->
+    <section id="live" class="section">
+        <h2 class="section-title">Live Work</h2>
+        <div class="visual-grid">
+            
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/featured/stm.gif" alt="360LAB">
+                <div class="overlay">
+                    <h3>360LAB</h3>
+                    <p>360° live shows and installations</p>
+                </div>
+            </a>
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/featured/tvwall.gif" alt="TV Wall">
+                <div class="overlay">
+                    <h3>TV Wall</h3>
+                    <p>Art Installation for Extrema Outdoor</p>
+                </div>
+            </a>
+            <a href="#art" class="visual-item">
+                <img src="assets/images/live/stift.png" alt="Stift Festival">
+                <div class="overlay">
+                    <h3>STIFT FESTIVAL</h3>
+                    <p>Live visuals for Vivaldi Recomposed - Four Seasons</p>
+                </div>
+            </a>
+
+            
+            
+            <a href="#art" class="visual-item">
+                <img src="assets/images/live/ledcube baby.gif" alt="LED Cube">
+                <div class="overlay">
+                    <h3>LED CUBE</h3>
+                    <p>Visuals for the LED Cube in the heart of Enschede, NL</p>
+                </div>
+            </a>
+            
+            <a href="#art" class="visual-item">
+                <img src="assets/images/featured/iA.gif" alt="iPhoneholics Anonymous">
+                <div class="overlay">
+                    <h3>IPHONEHOLICS ANONYMOUS</h3>
+                    <p>Interactive Dance Performance</p>
+                </div>
+            </a>
+            
+            
+            <a href="#art" class="visual-item">
+                <img src="assets/images/live/onder.jpg" alt="Onder">
+                <div class="overlay">
+                    <h3>Onder</h3>
+                    <p>Art Installation for Onder de Radar</p>
+                </div>
+            </a>
+            
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/live/bauze.gif" alt="VJ">
+                <div class="overlay">
+                    <h3>VJ</h3>
+                    <p>Performed visuals for various EDM Artists and festivals</p>
+                </div>
+            </a>
+
+            
+            
+        </div>
+    </section>
+    
+    <!-- Art Installations Section -->
+    <section id="projects" class="section">
+        <h2 class="section-title">PROJECTS</h2>
+        <div class="visual-grid">
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/featured/heart2.png" alt="BITCHBOY MIDI Controller">
+                <div class="overlay">
+                    <h3>BITCHBOY</h3>
+                    <p>A MIDI Controller for VJs</p>
+                </div>
+            </a>
+            
+            
+
+            <a href="#art" class="visual-item wide">
+                <img src="assets/images/projects/noiseportal.jpg" alt="Noise Portal">
+                <div class="overlay">
+                    <h3>NOISE PORTAL</h3>
+                    <p>Audiovisual collective, NL</p>
+                </div>
+            </a>
+
+            <a href="#art" class="visual-item">
+                <img src="assets/images/featured/78.png" alt="78*">
+                <div class="overlay">
+                    <h3>78*</h3>
+                    <p>Original music, visuals and audiovisual shows</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+<!-- Option 2: Modern CSS Alternative (recommended) -->
+<!-- Modern CSS Marquee with Perfect Looping -->
+<h2 class="section-title">Collaborators</h2>
+<section class="collaborators-section">
+    
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <!-- Original Set -->
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
+            <!-- Mirrored Set (for seamless looping) -->
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
+            <!-- Mirrored Set (for seamless looping) -->
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
+            <!-- Mirrored Set (for seamless looping) -->
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
+        </div>
+    </div>
+</section>
+
+    
+    
+    <!-- <section id="categories" class="section">
+        <h2 class="section-title">Explore</h2>
+        <div class="category-nav">
+            
+            <div class="category-card">
+                <h3>LIVE PERFORMANCES</h3>
+                <ul>
+                    <li><a href="78.html">78*</a></li>
+                    <li><a href="vjing.html">VJING</a></li>
+                    <li><a href="festivals.html">FESTIVALS</a></li>
+                    <li><a href="bitchboy.html">BITCHBOY</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="category-card">
+                <h3>ART INSTALLATIONS</h3>
+                <ul>
+                    <li><a href="neon-grid.html">NEON GRID</a></li>
+                    <li><a href="sound-garden.html">SOUND GARDEN</a></li>
+                    <li><a href="data-veil.html">DATA VEIL</a></li>
+                    <li><a href="kinetic-field.html">KINETIC FIELD</a></li>
+                </ul>
+            </div>
+            
+           
+            <div class="category-card">
+                <h3>VISUALS</h3>
+                <ul>
+                    <li><a href="vjpacks.html">VJ PACKS</a></li>
+                    <li><a href="videoediting.html">VIDEO EDITING</a></li>
+                    <li><a href="audiovisualmixes.html">AUDIOVISUAL MIXES</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="category-card">
+                <h3>HARDWARE</h3>
+                <ul>
+                    <li><a href="bitchboy.html">BITCHBOY</a></li>
+                    <li><a href="djv1.html">DJV1</a></li>
+                    <li><a href="djv2.html">DJV2</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="category-card">
+                <h3>RESEARCH</h3>
+                <ul>
+                    <li><a href="bitchboy-research.html">BITCHBOY (research)</a></li>
+                    <li><a href="supervjpro.html">SUPER VJ PRO</a></li>
+                    <li><a href="uiux.html">UI/UX</a></li>
+                </ul>
+            </div>
+        </div>
+    </section> -->
+    
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <h2 class="section-title">Team</h2>
+        <div class="team-grid">
+            <a href="https://christos.tech" target="_blank">
+            <div class="team-member">
+                <img src="assets/images/team/christos.png" alt="CHRISTOS">
+                <h3>CHRISTOS</h3>
+                <p>Founder / Creative Director</p>
+            </div>
+            </a>
+            <div class="team-member">
+                <img src="assets/images/team/christos2.png" alt="CHRISTOS">
+                <h3>CHRISTOS 2</h3>
+                <p>Co - Founder / CTO</p>
+            </div>
+        </div>
+    </section>
+    
+    
+</body>
+</html>
