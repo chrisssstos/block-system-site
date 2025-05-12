@@ -1,0 +1,23 @@
+
+When making changes:
+# Check which files have changed
+git status
+
+# Stage changes
+git add .
+
+# Commit changes with a message
+git commit -m "Updated homepage design"
+
+# Push changes to remote
+git push
+
+
+On your other computer:
+# Pull the latest changes
+git pull origin main
+
+# After making changes, push them
+git add .
+git commit -m "Updated from laptop"
+git push
