@@ -407,6 +407,329 @@
                 max-height: 80%;
             }
         }
+
+/* Sludge Life Style Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-container {
+    background: var(--accent);
+    border: 2px solid var(--primary);
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.2s ease;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.popup-overlay.active .popup-container {
+    transform: scale(1);
+}
+
+.popup-header {
+    background: var(--primary);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary);
+}
+
+.popup-title {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.popup-close {
+    background: none;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-size: 16px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.popup-close:hover {
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.popup-content {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: calc(90vh - 60px);
+}
+
+.popup-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 2px solid var(--primary);
+}
+
+.popup-text {
+    color: var(--primary);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.popup-text h3 {
+    color: var(--primary);
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 4px;
+}
+
+.popup-text p {
+    margin-bottom: 16px;
+}
+
+.popup-text ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.popup-text li {
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+/* Mobile popup adjustments */
+@media (max-width: 768px) {
+    .popup-container {
+        max-width: 95vw;
+        max-height: 95vh;
+        margin: 0.5rem;
+    }
+    
+    .popup-header {
+        padding: 6px 10px;
+    }
+    
+    .popup-title {
+        font-size: 12px;
+    }
+    
+    .popup-close {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+    
+    .popup-content {
+        padding: 12px;
+        max-height: calc(95vh - 50px);
+    }
+    
+    .popup-text {
+        font-size: 13px;
+    }
+    
+    .popup-text h3 {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .popup-text p {
+        margin-bottom: 14px;
+    }
+    
+    .popup-text li {
+        margin-bottom: 6px;
+    }
+}
+.popup-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    margin-bottom: 16px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .popup-image {
+        max-height: 200px;
+        margin-bottom: 12px;
+    }
+}
+
+.popup-carousel {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.popup-carousel-container {
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    position: relative;
+}
+
+.popup-carousel-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.popup-carousel-slide {
+    min-width: 100%;
+    height: 500px;
+}
+
+.popup-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.popup-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.popup-carousel-nav:hover {
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.popup-carousel-prev {
+    left: 8px;
+}
+
+.popup-carousel-next {
+    right: 8px;
+}
+
+.popup-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.popup-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.popup-carousel-dot.active {
+    background: var(--accent);
+    border-color: var(--primary);
+}
+
+.popup-carousel-counter {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: var(--primary);
+    color: var(--accent);
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid var(--accent);
+}
+
+/* Single image fallback */
+.popup-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    margin-bottom: 16px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .popup-carousel-slide {
+        height: 200px;
+    }
+    
+    .popup-carousel-nav {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+    
+    .popup-carousel-prev {
+        left: 4px;
+    }
+    
+    .popup-carousel-next {
+        right: 4px;
+    }
+    
+    .popup-carousel-counter {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    
+    .popup-image {
+        max-height: 200px;
+        margin-bottom: 12px;
+    }
+}
+
+.visual-item {
+    /* your existing styles */
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -420,7 +743,15 @@
             <li><a href="#team">Team</a></li>
         </ul>
     </nav>
-    
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <div class="popup-header">
+                <h2 class="popup-title" id="popupTitle"></h2>
+                <button class="popup-close" id="popupClose">×</button>
+            </div>
+            <div class="popup-content" id="popupContent"></div>
+        </div>
+    </div>
     <!-- Video Banner with Logo -->
     <div class="video-banner">
         <video autoplay muted loop playsinline>
@@ -512,13 +843,13 @@
                 </div>
             </a>
             
-            <a href="#art" class="visual-item">
+            <div class="visual-item" data-popup-type="text" data-popup-title="iPhoneholics Anonymous" data-popup-images="assets/images/live/iA (1).jpg,assets/images/live/iA (2).jpg,assets/images/live/iA (3).jpg" data-popup-content="<p>A dance performance that mixes interactive visuals, dance, artificial intelligence, text messages, and data from the audience he aims to highlight the contrast we are living in: having a physical body while communicating online. This contrast is highlighted by the hybridity of the performance: with an audience watching and interacting with the same performance, either within the theater or online from their home.</p>">
                 <img src="assets/images/featured/iA.gif" alt="iPhoneholics Anonymous">
                 <div class="overlay">
                     <h3>IPHONEHOLICS ANONYMOUS</h3>
                     <p>Interactive Dance Performance</p>
                 </div>
-            </a>
+            </div>
             
             
             <a href="#art" class="visual-item">
@@ -703,7 +1034,199 @@
         </div>
     </section>
     
-    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+   const visualItems = document.querySelectorAll('.visual-item:not([href]):not(a)');
+   const popupOverlay = document.getElementById('popupOverlay');
+   const popupTitle = document.getElementById('popupTitle');
+   const popupContent = document.getElementById('popupContent');
+   const popupClose = document.getElementById('popupClose');
+
+   let currentSlide = 0;
+   let totalSlides = 0;
+
+   function createCarousel(images, title) {
+       totalSlides = images.length;
+       currentSlide = 0;
+
+       let carouselHTML = `
+           <div class="popup-carousel">
+               <div class="popup-carousel-container">
+                   <div class="popup-carousel-track" id="carouselTrack">
+       `;
+
+       images.forEach((image, index) => {
+           carouselHTML += `
+               <div class="popup-carousel-slide">
+                   <img src="${image.trim()}" alt="${title} - Image ${index + 1}">
+               </div>
+           `;
+       });
+
+       carouselHTML += `
+                   </div>
+                   <button class="popup-carousel-nav popup-carousel-prev" id="carouselPrev">‹</button>
+                   <button class="popup-carousel-nav popup-carousel-next" id="carouselNext">›</button>
+                   <div class="popup-carousel-counter">
+                       <span id="carouselCurrent">1</span> / <span id="carouselTotal">${totalSlides}</span>
+                   </div>
+               </div>
+       `;
+
+       if (totalSlides > 1) {
+           carouselHTML += '<div class="popup-carousel-dots" id="carouselDots">';
+           for (let i = 0; i < totalSlides; i++) {
+               carouselHTML += `<div class="popup-carousel-dot ${i === 0 ? 'active' : ''}" data-slide="${i}"></div>`;
+           }
+           carouselHTML += '</div>';
+       }
+
+       carouselHTML += '</div>';
+       return carouselHTML;
+   }
+
+   function updateCarousel() {
+       const track = document.getElementById('carouselTrack');
+       const current = document.getElementById('carouselCurrent');
+       const dots = document.querySelectorAll('.popup-carousel-dot');
+
+       if (track) {
+           track.style.transform = `translateX(-${currentSlide * 100}%)`;
+       }
+       if (current) {
+           current.textContent = currentSlide + 1;
+       }
+       
+       dots.forEach((dot, index) => {
+           dot.classList.toggle('active', index === currentSlide);
+       });
+   }
+
+   function nextSlide() {
+       currentSlide = (currentSlide + 1) % totalSlides;
+       updateCarousel();
+   }
+
+   function prevSlide() {
+       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+       updateCarousel();
+   }
+
+   function goToSlide(index) {
+       currentSlide = index;
+       updateCarousel();
+   }
+
+   visualItems.forEach(item => {
+       item.addEventListener('click', function() {
+           const popupType = this.dataset.popupType;
+           const title = this.dataset.popupTitle;
+           
+           popupTitle.textContent = title;
+           
+           if (popupType === 'video') {
+               const videoSrc = this.dataset.popupVideo;
+               popupContent.innerHTML = `<video class="popup-video" controls autoplay muted><source src="${videoSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+           } else if (popupType === 'text') {
+               const content = this.dataset.popupContent;
+               const imagesData = this.dataset.popupImages || this.dataset.popupImage;
+               
+               let htmlContent = '<div class="popup-text">';
+               
+               if (imagesData) {
+                   const images = imagesData.includes(',') ? imagesData.split(',') : [imagesData];
+                   
+                   if (images.length > 1) {
+                       htmlContent += createCarousel(images, title);
+                   } else {
+                       htmlContent += `<img src="${images[0].trim()}" alt="${title}" class="popup-image">`;
+                   }
+               }
+               
+               htmlContent += content + '</div>';
+               popupContent.innerHTML = htmlContent;
+
+               // Add event listeners for carousel
+               const prevBtn = document.getElementById('carouselPrev');
+               const nextBtn = document.getElementById('carouselNext');
+               const dots = document.querySelectorAll('.popup-carousel-dot');
+
+               if (prevBtn) {
+                   prevBtn.addEventListener('click', (e) => {
+                       e.preventDefault();
+                       e.stopPropagation();
+                       prevSlide();
+                   });
+               }
+
+               if (nextBtn) {
+                   nextBtn.addEventListener('click', (e) => {
+                       e.preventDefault();
+                       e.stopPropagation();
+                       nextSlide();
+                   });
+               }
+               
+               dots.forEach((dot, index) => {
+                   dot.addEventListener('click', (e) => {
+                       e.preventDefault();
+                       e.stopPropagation();
+                       goToSlide(index);
+                   });
+               });
+
+               // Prevent touch events from interfering
+               const carouselContainer = document.querySelector('.popup-carousel-container');
+               if (carouselContainer) {
+                   carouselContainer.addEventListener('touchstart', (e) => {
+                       e.stopPropagation();
+                   });
+                   
+                   carouselContainer.addEventListener('touchend', (e) => {
+                       e.stopPropagation();
+                   });
+               }
+
+               // Keyboard navigation
+               const handleKeydown = (e) => {
+                   if (popupOverlay.classList.contains('active') && totalSlides > 1) {
+                       if (e.key === 'ArrowLeft') prevSlide();
+                       if (e.key === 'ArrowRight') nextSlide();
+                   }
+               };
+               document.addEventListener('keydown', handleKeydown);
+           }
+           
+           popupOverlay.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+   });
+
+   function closePopup() {
+       popupOverlay.classList.remove('active');
+       document.body.style.overflow = '';
+       setTimeout(() => {
+           popupContent.innerHTML = '';
+           currentSlide = 0;
+           totalSlides = 0;
+       }, 300);
+   }
+
+   popupClose.addEventListener('click', closePopup);
+   
+   popupOverlay.addEventListener('click', function(e) {
+       if (e.target === popupOverlay) {
+           closePopup();
+       }
+   });
+   
+   document.addEventListener('keydown', function(e) {
+       if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+           closePopup();
+       }
+   });
+});
+        </script>
 </body>
 <div class="footer-bottom">
     <p>&copy; 2025 BLOCK SYSTEM. All Rights Reserved.</p>
