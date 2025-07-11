@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLOCK SYSTEM</title>
+    
+    <!-- Performance optimizations -->
+    <meta name="description" content="Block System - Audiovisual art, live performances, and installations. Professional VJing and creative technology.">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preload" href="assets/images/block-sys-logo-sticker.png" as="image">
+    <link rel="preload" href="assets/videos/main-banner.mp4" as="video" type="video/mp4">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GYGJS6KZR"></script>
@@ -56,6 +62,7 @@
             left: 0;
             z-index: 1;
             opacity: 1;
+            will-change: transform;
         }
         
         .banner-logo {
@@ -169,6 +176,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+            will-change: transform;
         }
         
         .visual-item:hover {
@@ -372,20 +380,26 @@
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .section {
-                padding: 4rem 1.5rem;
+                padding: 3rem 1rem;
             }
             
             .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+                letter-spacing: 2px;
             }
             
             .visual-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .visual-item.wide {
                 grid-column: span 1;
+            }
+            
+            nav {
+                padding: 0.5rem;
             }
             
             nav ul {
@@ -393,18 +407,65 @@
             }
             
             nav a {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
+                letter-spacing: 1px;
             }
             
             .collaborator-logo {
-                height: 80px;
-                margin: 0 1.5rem;
-                
+                height: 60px;
+                margin: 0 1rem;
             }
             
             .banner-logo {
-                max-width: 80%;
-                max-height: 80%;
+                max-width: 70%;
+                max-height: 70%;
+            }
+            
+            .video-banner {
+                height: 100vh;
+            }
+        }
+        
+        /* Tablet Responsiveness */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .section {
+                padding: 5rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .visual-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            nav ul {
+                gap: 2rem;
+            }
+        }
+        
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .section {
+                padding: 2rem 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                font-size: 0.6rem;
+            }
+            
+            .collaborator-logo {
+                height: 50px;
+                margin: 0 0.5rem;
             }
         }
 
@@ -739,7 +800,7 @@
             <li><a href="#featured">Featured</a></li>
             <li><a href="#live">Live Work</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#visuals">Visuals</a></li>
+            <!-- <li><a href="#visuals">Visuals</a></li> -->
             <li><a href="#team">Team</a></li>
         </ul>
     </nav>
@@ -754,11 +815,11 @@
     </div>
     <!-- Video Banner with Logo -->
     <div class="video-banner">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline preload="metadata">
             <source src="assets/videos/main-banner.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <img src="assets/images/block-sys-logo-sticker.png" alt="BLOCK SYSTEM" class="banner-logo">
+        <img src="assets/images/block-sys-logo-sticker.png" alt="BLOCK SYSTEM" class="banner-logo" loading="eager">
     </div>
     
     <!-- Featured Section -->
@@ -766,30 +827,44 @@
         <h2 class="section-title">Featured</h2>
         <div class="visual-grid">
             <!-- BITCHBOY Featured Item -->
-            <a href="https://www.instagram.com/bitchboy.vj/" target="_blank" class="visual-item wide">
+            <a href="https://www.bitchboy.lol/" target="_blank" class="visual-item wide">
                 <img src="assets/images/featured/heart2.png" alt="BITCHBOY MIDI Controller">
                 <div class="overlay">
                     <h3>BITCHBOY</h3>
                     <p>A MIDI Controller for VJs</p>
                 </div>
             </a>
+            <div class="visual-item wide" data-popup-type="text" data-popup-title="VJing Experience" data-popup-images="assets/images/live/BSE.jpeg, assets/images/live/np2live.png,  assets/images/live/per_xyd_1.jpg,assets/images/live/glad.jpeg" data-popup-content="<h3>Professional VJ Work</h3><p>Creating immersive audiovisual experiences for electronic music events and artists.</p><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;'><div><h3>Notable Festivals/Events</h3><ul><li><strong>Rampage Open Air 2025</strong></li><li><strong>Bass Paradise 2024</strong></li><li><strong>Extrema Outdoor 2023</strong></li><li><strong>Onder de Radar 2023</strong></li></ul></div><div><h3>Notable Artists</h3><ul><li><strong>Code: Pandorum</strong></li><li><strong>Explorers of the Internet</strong></li><li><strong>Thrasher</strong></li><li><strong>BVSSIC</strong></li></ul></div></div>">
+                <img src="assets/images/live/rampage live.jpeg" alt="VJ" loading="lazy">
+                <div class="overlay">
+                    <h3>VJing</h3>
+                    <p>Performed visuals for various EDM Artists and festivals</p>
+                </div>
+            </div>
+            <a href="#art" class="visual-item">
+                <img src="assets/images/live/opera.gif" alt="Opera">
+                <div class="overlay">
+                    <h3>PER XYDEON</h3>
+                    <p>Holographic display work for Opera piece "Per Xydeon Nightshades Within The Summer Grasses"</p>
+                </div>
+            </a>
 
             <!-- TV WALL -->
-            <a href="#art" class="visual-item">
+            <!-- <a href="#art" class="visual-item">
                 <img src="assets/images/featured/tvwall.gif" alt="TV Wall">
                 <div class="overlay">
                     <h3>TV Wall</h3>
                     <p>Art Installation for Extrema Outdoor</p>
                 </div>
-            </a>
+            </a> -->
             <!-- Installation Item -->
-            <a href="#art" class="visual-item">
+            <!-- <a href="#art" class="visual-item">
                 <img src="assets/images/featured/stm.gif" alt="360LAB">
                 <div class="overlay">
                     <h3>360LAB</h3>
                     <p>360° live shows and installations</p>
                 </div>
-            </a>
+            </a> -->
 
             <!-- Performance Item -->
             <!-- <a href="#art" class="visual-item">
@@ -810,14 +885,14 @@
     <section id="live" class="section">
         <h2 class="section-title">Live Work</h2>
         <div class="visual-grid">
-            
-            <div class="visual-item wide" data-popup-type="text" data-popup-title="360LAB" data-popup-images="assets/images/live/360lab (2).jpg,assets/images/live/360lab (1).jpg,assets/images/live/360lab (3).jpg" data-popup-content="<p>d</p>">
-                <img src="assets/images/featured/stm.gif" alt="360LAB">
+            <div class="visual-item wide" data-popup-type="text" data-popup-title="VJing Experience" data-popup-images="assets/images/live/BSE.jpeg, assets/images/live/np2live.png,  assets/images/live/per_xyd_1.jpg,assets/images/live/bauze.gif" data-popup-content="<h3>Professional VJ Work</h3><p>Creating immersive audiovisual experiences for electronic music events and artists.</p><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;'><div><h3>Notable Festivals/Events</h3><ul><li><strong>Rampage Open Air 2025</strong></li><li><strong>Bass Paradise 2024</strong></li><li><strong>Extrema Outdoor 2023</strong></li><li><strong>Onder de Radar 2023</strong></li></ul></div><div><h3>Notable Artists</h3><ul><li><strong>Code: Pandorum</strong></li><li><strong>Explorers of the Internet</strong></li><li><strong>Thrasher</strong></li><li><strong>BVSSIC</strong></li></ul></div></div>">
+                <img src="assets/images/live/rampage live.jpeg" alt="VJ" loading="lazy">
                 <div class="overlay">
-                    <h3>360LAB</h3>
-                    <p>360° live shows and installations</p>
+                    <h3>VJing</h3>
+                    <p>Performed visuals for various EDM Artists and festivals</p>
                 </div>
             </div>
+            
             <a href="#art" class="visual-item wide">
                 <img src="assets/images/featured/tvwall.gif" alt="TV Wall">
                 <div class="overlay">
@@ -860,15 +935,15 @@
                 </div>
             </a>
             
-            <a href="#art" class="visual-item wide">
-                <img src="assets/images/live/bauze.gif" alt="VJ">
+            <div class="visual-item" data-popup-type="text" data-popup-title="360LAB" data-popup-images="assets/images/live/360lab (2).jpg,assets/images/live/360lab (1).jpg,assets/images/live/360lab (3).jpg" data-popup-content="<p></p>">
+                <img src="assets/images/featured/stm.gif" alt="360LAB">
                 <div class="overlay">
-                    <h3>VJing</h3>
-                    <p>Performed visuals for various EDM Artists and festivals</p>
+                    <h3>360LAB</h3>
+                    <p>360° live shows and installations</p>
                 </div>
-            </a>
-            <a href="#art" class="visual-item wide">
-                <img src="assets/images/live/per_xyd_1.jpg" alt="Opera">
+            </div>
+            <a href="#art" class="visual-item">
+                <img src="assets/images/live/opera.gif" alt="Opera">
                 <div class="overlay">
                     <h3>PER XYDEON</h3>
                     <p>Holographic display work for Opera piece "Per Xydeon Nightshades Within The Summer Grasses"</p>
@@ -881,10 +956,10 @@
     </section>
     
     <!-- Art Installations Section -->
-    <section id="Projects" class="section">
+    <section id="projects" class="section">
         <h2 class="section-title">PROJECTS</h2>
         <div class="visual-grid">
-            <a href="https://www.instagram.com/bitchboy.vj/" target="_blank" class="visual-item wide">
+            <a href="www.bitchboy.lol" target="_blank" class="visual-item wide">
                 <img src="assets/images/featured/heart2.png" alt="BITCHBOY MIDI Controller">
                 <div class="overlay">
                     <h3>BITCHBOY</h3>
@@ -902,7 +977,7 @@
                 </div>
             </a>
 
-            <a href="#art" class="visual-item">
+            <a href="#project" class="visual-item">
                 <img src="assets/images/featured/78.png" alt="78*">
                 <div class="overlay">
                     <h3>78*</h3>
@@ -920,57 +995,57 @@
     <div class="marquee-container">
         <div class="marquee-content">
             <!-- Original Set -->
-            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
-            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
-            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo">
-            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo">
-            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
-            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
-            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
-            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo">
-            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
-            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
-            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
-            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo" loading="lazy">
             <!-- Mirrored Set (for seamless looping) -->
-            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
-            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
-            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo">
-            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo">
-            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
-            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
-            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
-            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo">
-            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
-            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
-            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
-            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo" loading="lazy">
             <!-- Mirrored Set (for seamless looping) -->
-            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
-            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
-            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo">
-            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo">
-            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
-            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
-            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
-            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo">
-            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
-            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
-            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
-            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo" loading="lazy">
             <!-- Mirrored Set (for seamless looping) -->
-            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo">
-            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo">
-            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo">
-            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo">
-            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo">
-            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo">
-            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo">
-            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo">
-            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo">
-            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo">
-            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo">
-            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo">
+            <img src="assets/images/collaborators/booster.png" alt="booster" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/crosstic.png" alt="cross tic" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/rampage.png" alt="Rampage" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/bass_paradise.png" alt="Bass Paradise" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/extrema.png" alt="Extrema Outoor" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/gogbot2.png" alt="gogbot" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/onder2.png" alt="Onder de Radar" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/opera.png" alt="Opera" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/patronaat.png" alt="Patronaat" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/stift.png" alt="Stift Festival" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/parksessies.png" alt="Parksessies" class="collaborator-logo" loading="lazy">
+            <img src="assets/images/collaborators/cudle1.png" alt="cuddlefish studios" class="collaborator-logo" loading="lazy">
         </div>
     </div>
 </section>
@@ -1055,6 +1130,7 @@
     
     <script>
        document.addEventListener('DOMContentLoaded', function() {
+    // Cache DOM elements
     const visualItems = document.querySelectorAll('.visual-item:not([href]):not(a)');
     const popupOverlay = document.getElementById('popupOverlay');
     const popupTitle = document.getElementById('popupTitle');
@@ -1068,21 +1144,25 @@
         totalSlides = images.length;
         currentSlide = 0;
 
-        let carouselHTML = `
+        // Use template literals more efficiently
+        const slides = images.map((image, index) => 
+            `<div class="popup-carousel-slide">
+                <img src="${image.trim()}" alt="${title} - Image ${index + 1}" loading="lazy">
+            </div>`
+        ).join('');
+
+        const dots = totalSlides > 1 ? 
+            `<div class="popup-carousel-dots" id="carouselDots">
+                ${Array.from({length: totalSlides}, (_, i) => 
+                    `<div class="popup-carousel-dot ${i === 0 ? 'active' : ''}" data-slide="${i}"></div>`
+                ).join('')}
+            </div>` : '';
+
+        return `
             <div class="popup-carousel">
                 <div class="popup-carousel-container">
                     <div class="popup-carousel-track" id="carouselTrack">
-        `;
-
-        images.forEach((image, index) => {
-            carouselHTML += `
-                <div class="popup-carousel-slide">
-                    <img src="${image.trim()}" alt="${title} - Image ${index + 1}">
-                </div>
-            `;
-        });
-
-        carouselHTML += `
+                        ${slides}
                     </div>
                     <button class="popup-carousel-nav popup-carousel-prev" id="carouselPrev">‹</button>
                     <button class="popup-carousel-nav popup-carousel-next" id="carouselNext">›</button>
@@ -1090,18 +1170,8 @@
                         <span id="carouselCurrent">1</span> / <span id="carouselTotal">${totalSlides}</span>
                     </div>
                 </div>
-        `;
-
-        if (totalSlides > 1) {
-            carouselHTML += '<div class="popup-carousel-dots" id="carouselDots">';
-            for (let i = 0; i < totalSlides; i++) {
-                carouselHTML += `<div class="popup-carousel-dot ${i === 0 ? 'active' : ''}" data-slide="${i}"></div>`;
-            }
-            carouselHTML += '</div>';
-        }
-
-        carouselHTML += '</div>';
-        return carouselHTML;
+                ${dots}
+            </div>`;
     }
 
     function updateCarousel() {
@@ -1109,15 +1179,18 @@
         const current = document.getElementById('carouselCurrent');
         const dots = document.querySelectorAll('.popup-carousel-dot');
 
-        if (track) {
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-        if (current) {
-            current.textContent = currentSlide + 1;
-        }
-        
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
+        // Use requestAnimationFrame for smoother animations
+        requestAnimationFrame(() => {
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            if (current) {
+                current.textContent = currentSlide + 1;
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
         });
     }
 
